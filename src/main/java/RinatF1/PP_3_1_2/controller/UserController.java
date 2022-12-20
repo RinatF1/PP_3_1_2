@@ -8,22 +8,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class MyController {
+public class UserController {
 
     private UserService userService;
     @Autowired
-    public MyController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String showAllUsers(ModelMap model){
         model.addAttribute("allUsers", userService.getAllUsers());
     return "all_users";
     }
 
 
-    @RequestMapping("/addNewUser")
+    @GetMapping("/addNewUser")
     public String addNewUser(ModelMap model){
         model.addAttribute("user", new User());
         return "add_user";
@@ -34,7 +34,7 @@ public class MyController {
         return "update_user";
     }
 
-    @RequestMapping("/addUser")
+    @PostMapping("/addUser")
     public String saveUser(@ModelAttribute("user") User user){
         userService.addUser(user);
         return "redirect:/";
@@ -42,7 +42,7 @@ public class MyController {
 
 
 
-    @RequestMapping (value="/deleteUser/{id}")
+    @GetMapping (value="/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return "redirect:/";
