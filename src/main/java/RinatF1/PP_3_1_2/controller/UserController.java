@@ -42,7 +42,7 @@ public class UserController {
 
 
 
-    @GetMapping (value="/deleteUser/{id}")
+    @DeleteMapping (value="/deleteUser/{id}")
     public String deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return "redirect:/";
